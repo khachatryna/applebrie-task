@@ -1,0 +1,48 @@
+.navigation {
+  &-list {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    &-item {
+      position: relative;
+      &:not(:last-child) {
+        margin-right: 10px;
+      }
+      & a {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        font-weight: bold;
+        color: #000;
+        transition: color 0.5s ease-in-out;
+        &:before {
+          content: "";
+          background-color: $color4;
+          width: 0;
+          height: 3px;
+          position: absolute;
+          bottom: -10px;
+          left: 50%;
+          transform: translate(-50%);
+          transition: width 0.5s ease-in-out;
+        }
+      }
+      &:hover {
+        & a {
+          color: $color4;
+          &:before {
+            width: 20px;
+          }
+        }
+      }
+      & a {
+          &.active {
+          color: $color4;
+          &:before {
+            width: 20px;
+          }
+        }
+      }
+    }
+  }
+}

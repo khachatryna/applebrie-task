@@ -1,57 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import { Route, Routes, BrowserRouter} from "react-router-dom";
+import {createMemoryHistory } from "history";
+import Header from "./view/layouts/header";
+import Footer from "./view/layouts/footer";
+import Users from "./view/pages/users";
+import Posts from "./view/pages/posts";
+import HomePage from "./view/pages/homePage";
+import "./assets/scss/main.scss"
 
 function App() {
+  const history = createMemoryHistory();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
+      <BrowserRouter location={history.location} navigator={history}>
+        <Header />
+        <main className="main-layout">
+          <Routes>
+              <Route path="/" element={<HomePage />}/>
+              <Route path="/users" element={<Users />}/>
+              <Route path="/posts" element={<Posts/>}>
+                  <Route path=":id" element={<Posts />} />
+              </Route>
+          </Routes>
+        </main>
+        <Footer />
+      </BrowserRouter>
   );
 }
 
